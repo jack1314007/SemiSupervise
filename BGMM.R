@@ -1,5 +1,6 @@
 #http://bgmm.molgen.mpg.de/rapBGMM/
 library(bgmm)
+# example -----------------------------------------------------------------
 data(genotypes)
 modelSupervised = supervised(knowns = genotypes$knowns, class = genotypes$labels)
 plot(modelSupervised)
@@ -11,7 +12,6 @@ modelSoft = soft(X = genotypes$X, knowns = genotypes$knowns,   P = genotypes$B)
 plot(modelSoft)
 modelUnSupervised = unsupervised(X = genotypes$X, k = 3)
 plot(modelUnSupervised)
-
 preds = predict(modelSoft, X = genotypes$X)
-
 str(preds)
+# example end -------------------------------------------------------------
