@@ -15,3 +15,5 @@ plot(modelUnSupervised)
 preds = predict(modelSoft, X = genotypes$X)
 str(preds)
 # example end -------------------------------------------------------------
+sms.dir <- "./data/smsspamcollection/SMSSpamCollection"
+sms.data <- read.table(sms.dir,sep="\t",quote="",fill=FALSE,col.names=c("class", "sms"),)
