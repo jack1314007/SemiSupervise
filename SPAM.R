@@ -35,8 +35,8 @@ acc <- confusionMatrix(pred,dataTest$y)
 
 
 library(bgmm)
-X_s = as.matrix(dataTrain[,1:57])
-knowns_s = as.matrix(dataTest[,1:57])
+X_s = as.matrix(dataTrain[,20:57])
+knowns_s = as.matrix(dataTest[,20:57])
 class_s = (dataTest[,58])
 rownames(X_s) <- NULL
 rownames(knowns_s) <- NULL
@@ -46,6 +46,7 @@ plot(modelSupervised)
 
 
 #EM
+library(EMCluster)
 emobj <- simple.init(knowns_s, nclass = 2)
 emobj <- shortemcluster(knowns_s, emobj)
 summary(emobj)
