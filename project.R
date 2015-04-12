@@ -42,15 +42,27 @@ spa.predict<-function(train,test,percentageOfUnlable)
   gsemi<-spa(mixdata.class,graph=train.graph,control=spa.control(gcv="aGCV"))
   
   
-  res <- round(gsemi,0)
-  a <- confusion(res, spam[,58])
-  accuracy = 
+  res <- round(gsemi$model$fit*1.2,0)
+  a <- confusion(res[1351:1500], test[,58])
   return(a)
 }
 error <- list()
-for(i in 1:100)
+sumError = seq(10,90,10)
+for(i in seq(10,90,10))
 {
-  print(i)
-  error[[i]] <- try(spa.predict(sampleSet,i,800))
-  if(class(error[i]) == "try-error") next;
+  eachError <- list()
+  sumError1 = 0
+  for (j in 1:10 )
+  {
+    print(i+j)
+    eachError[[j]] <- try(spa.predict(trainSet,testSet,i))
+    a <- eachError[[j]]
+    b = (a[1,1]+a[2,2])/(a[1,1]+a[2,1]+a[1,2]+a[2,2])
+    c = 1-b
+    sumError1 <- sumError1 + c
+    print(eachError[[j]])
+    if(class(eachError[j]) == "try-error") next;
+  }
+  sumError[i/10] <- sumError1/10
+  error[[i]] <- eachError
 }
